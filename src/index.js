@@ -21,7 +21,7 @@ function updateDog(event){
         body: JSON.stringify(dogBoyStatus)
 
     }).then(response => response.json())
-    .then(json => json.isGoodDog ? "Good Dog!" : "Bad Dog!")
+    .then(json => event.target.innerText = json.isGoodDog ? "Good Dog!" : "Bad Dog!")
 }
 
 //build dog-nav-bar
@@ -50,6 +50,7 @@ function buildDogPage(dog){
     dogButton.dataset.boolean = dog.isGoodDog
     getDogInfo().appendChild(dogButton)
     dogButton.addEventListener("click", updateDog)
+    //dogButton.innerText = dog.isGoodDog ? "Good Dog!" : "Bad Dog!"
 }
 
 function dogButton(event){
