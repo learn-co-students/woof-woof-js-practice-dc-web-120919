@@ -1,10 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
     renderDogs()
+    getFilter().addEventListener("click", filterDogs)
 })
 
 // fetch dogs
 function renderDogs(){
-    fetch("http://localhost:3000/pups")
+    return fetch("http://localhost:3000/pups")
     .then(response => response.json())
     .then(dogs => dogs.forEach(dog => buildDogNavBar(dog)))
 }
@@ -50,7 +51,6 @@ function buildDogPage(dog){
     dogButton.dataset.boolean = dog.isGoodDog
     getDogInfo().appendChild(dogButton)
     dogButton.addEventListener("click", updateDog)
-    //dogButton.innerText = dog.isGoodDog ? "Good Dog!" : "Bad Dog!"
 }
 
 function dogButton(event){
@@ -62,7 +62,6 @@ function dogButton(event){
     }
 }
 
-
 //get elements
 function getNavBar(){
     return document.getElementById("dog-bar")
@@ -72,4 +71,27 @@ function getDogInfo(){
     return document.getElementById("dog-info")
 }
 
+function getFilter(){
+    return document.getElementById("good-dog-filter")
+}
 
+
+
+// When a user clicks on the Filter Good Dogs button, two things should happen:
+
+// The button's text should change from "Filter good dogs: OFF" to "Filter good dogs: ON", or vice versa.
+function dogsArray(){
+    return fetch("http://localhost:3000/pups")
+    .then(response => response.json())
+    .then(console.log)
+}
+
+function filterDogs(event){
+    debugger
+    if (event.target.innerText == "Filter good dogs: OFF")
+        event.target.innerText = "Filter good dogs: ON"
+    
+    else if (event.target.innerText = "Filter good dogs: ON")
+        event.target.innerText = "Filter good dogs: OFF"
+}
+// If the button now says "ON" (meaning the filter is on), then the Dog Bar should only show pups whose isGoodDog attribute is true. If the filter is off, the Dog Bar should show all pups (like normal).
